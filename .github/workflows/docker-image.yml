@@ -3,9 +3,7 @@ name: Docker Image CI
 
 # 触发条件
 on:
-  push:
-    tags:       # tag更新时触发此workflow
-      - '*'
+  workflow_dispatch:
         
 #工作流程
 jobs:
@@ -22,8 +20,8 @@ jobs:
       run: |
         sudo timedatectl set-timezone "Asia/Shanghai"
         sudo apt-get update
-        sudo apt-get install --no-install-recommends git wget ca-certificates
-        sudo git clone https://github.com/HibiKier/zhenxun_bot.git $(pwd)/botfile
+        sudo apt-get install --no-install-recommends git wget ca-certificates -y
+        sudo git clone --depth=1 https://github.com/HibiKier/zhenxun_bot.git $(pwd)/botfile
         sudo rm -rf $(pwd)/botfile/.git
         sudo tar -zcf bot.tar.gz -C botfile .
         sudo rm -rf botfile
@@ -43,13 +41,13 @@ jobs:
       uses: docker/metadata-action@v4.0.1
       with:
         labels: |
-          MAINTAINER=Hibikier
+          MAINTAINER=Disappear9
           org.opencontainers.image.title=zhenxun_bot
           org.opencontainers.image.description=基于 Nonebot2 和 go-cqhttp 开发，以 postgresql 作为数据库，非常可爱的绪山真寻bot。
-          org.opencontainers.image.url=https://github.com/Sakuracio/zhenxun_bot_docker
+          org.opencontainers.image.url=https://github.com/D9Lab/zhenxun_bot_docker
           org.opencontainers.image.source=https://github.com/HibiKier/zhenxun_bot
         images: |
-          hibikier/zhenxun_bot
+          disappear9/zhenxun_bot
     
     # 构建 并 推送镜像
     - name: build and push docker image
