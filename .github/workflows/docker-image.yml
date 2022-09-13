@@ -46,6 +46,8 @@ jobs:
           org.opencontainers.image.description=基于 Nonebot2 和 go-cqhttp 开发，以 postgresql 作为数据库，非常可爱的绪山真寻bot。
           org.opencontainers.image.url=https://github.com/D9Lab/zhenxun_bot_docker
           org.opencontainers.image.source=https://github.com/HibiKier/zhenxun_bot
+        tags: |
+          type=raw,value=latest,enable={{is_default_branch}}
         images: |
           disappear9/zhenxun_bot
     
