@@ -12,6 +12,8 @@ jobs:
         persist-credentials: false
         fetch-depth: 0
     - name: Update Poetry Lock File
+      env:
+        PYTHON_KEYRING_BACKEND: keyring.backends.null.Keyring
       run: |
         sudo timedatectl set-timezone "Asia/Shanghai"
         sudo apt-get update
@@ -21,7 +23,7 @@ jobs:
         python3 -V
         pip3 -V
         echo "Start install Poetry"
-        pip3 install poetry
+        sudo pip3 install poetry
         echo "Show Poetry Version"
         poetry --version
         rm requirements.txt
