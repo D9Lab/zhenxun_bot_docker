@@ -30,7 +30,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 	fonts-wqy-microhei \
 	&& apt clean \
 	&& pip install -r requirements.txt --no-cache-dir \
-	&& pip install rich requests jinja2 thefuzz aiocache baike imageio \
+	&& pip install rich requests jinja2 thefuzz aiocache baike imageio pinyin \
 	&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 	&& echo 'Asia/Shanghai' > /etc/timezone
 
