@@ -7,11 +7,10 @@ on:
         
 env:
   REGISTRY: ghcr.io
-  IMAGE: disappear9/zhenxun_bot
+  IMAGE: d9lab/zhenxun_bot
   
 #工作流程
 jobs:
-
   build:
     # 运行环境
     runs-on: ubuntu-latest
