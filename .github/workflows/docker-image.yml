@@ -1,4 +1,3 @@
-# 构建docker镜像
 name: Docker Image CI
 
 # 触发条件
@@ -9,17 +8,15 @@ env:
   REGISTRY: ghcr.io
   IMAGE: d9lab/zhenxun_bot
   
-#工作流程
 jobs:
   build:
-    # 运行环境
+    name: Push Docker image
     runs-on: ubuntu-latest
     
     permissions:
       packages: write
       contents: read
       
-    # 运行步骤
     steps:
     
     # 检出（仓库）文件 / 获取代码
@@ -38,7 +35,7 @@ jobs:
     
     # 登录 ghcr.io
     - name: Login ghcr.io
-      uses: docker/login-action@v2.0.0
+      uses: docker/login-action@v2
       with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -47,7 +44,7 @@ jobs:
     # 镜像元数据操作
     - name: Docker Metadata action
       id: meta
-      uses: docker/metadata-action@v4.0.1
+      uses: docker/metadata-action@v4
       with:
         labels: |
           MAINTAINER=Disappear9
@@ -62,9 +59,11 @@ jobs:
     
     # 构建 并 推送镜像
     - name: build and push docker image
-      uses: docker/build-push-action@v3.0.0
+      uses: docker/build-push-action@v3
       with:
         context: .
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha,scope=${{ github.workflow }}
+        cache-to: type=gha,mode=max,scope=${{ github.workflow }}
