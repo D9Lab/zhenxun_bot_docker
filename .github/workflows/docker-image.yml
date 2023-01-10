@@ -7,6 +7,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE: d9lab/zhenxun_bot
+  REGISTRY2: docker.io
+  IMAGE2: d9lab01/zhenxun_bot
   
 jobs:
   build:
@@ -41,7 +43,14 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-    
+          
+    - name: Login DockerHub
+      uses: docker/login-action@v2
+      with:
+          registry: ${{ env.REGISTRY2 }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
     # 镜像元数据操作
     - name: Docker Metadata action
       id: meta
@@ -57,6 +66,7 @@ jobs:
           type=raw,value=latest,enable={{is_default_branch}}
         images: |
           ${{ env.REGISTRY }}/${{ env.IMAGE }}
+          ${{ env.REGISTRY2 }}/${{ env.IMAGE2 }}
     
     # 构建 并 推送镜像
     - name: build and push docker image
