@@ -31,7 +31,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   bot: #需要将 .env.dev 中的监听地址改为0.0.0.0
-    image: disappear9/zhenxun_bot:latest
+    image: ghcr.io/d9lab/zhenxun_bot:latest
     container_name: zxbot_zhenxun_bot
     depends_on: 
       - postgres
