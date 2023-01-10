@@ -2,9 +2,11 @@
 
 ![](https://img.shields.io/badge/Python%E7%89%88%E6%9C%AC-3.9-ff69b4?style=for-the-badge)
 ![](https://img.shields.io/badge/%E6%94%AF%E6%8C%81%E5%B9%B3%E5%8F%B0-amd64-8B008B?style=for-the-badge)
+![](https://img.shields.io/docker/pulls/d9lab01/zhenxun_bot?label=%E4%B8%8B%E8%BD%BD%E6%AC%A1%E6%95%B0&logo=docker&style=for-the-badge)
 
 # 使用Portainer建立Stacks
-打开Stacks，Add stack 粘贴以下代码  （如用Docker compose自行修改代码）
+打开Stacks，Add stack 粘贴以下代码  （如用Docker compose自行修改代码）  
+**推荐使用ghcr.io镜像源，我DockerHub账号不知道为啥被删了，如遇网络问题可换成DockerHub源。**
 ```
 version: '3.4'
 
@@ -31,7 +33,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   bot: #需要将 .env.dev 中的监听地址改为0.0.0.0
-    image: ghcr.io/d9lab/zhenxun_bot:latest
+    image: ghcr.io/d9lab/zhenxun_bot:latest #ghcr.io
+    #image: d9lab01/zhenxun_bot #DockerHub
     container_name: zxbot_zhenxun_bot
     depends_on: 
       - postgres
