@@ -30,7 +30,6 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 	fonts-wqy-microhei \
 	&& apt clean \
 	&& pip install -r requirements.txt --no-cache-dir \
-	&& pip install nonebot2[fastapi] rich requests thefuzz aiocache baike imageio pinyin \
-	&& playwright install-deps
+	&& pip install nonebot2[fastapi] rich requests thefuzz aiocache baike imageio pinyin
 
 CMD ["./zx-cli","-mode","docker"]
