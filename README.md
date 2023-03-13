@@ -41,7 +41,7 @@ services:
     restart: unless-stopped
     environment:
       - SU=114514 #管理员QQ
-      - DB=postgresql://zxbot:zxbot@postgres:5432/zxbot_database
+      - DB=postgres://zxbot:zxbot@postgres:5432/zxbot_database
     volumes:
       - bot_data:/bot
     links:
